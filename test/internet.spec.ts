@@ -19,6 +19,7 @@ const functionNames = [
   'domainSuffix',
   'domainWord',
   'ip',
+  'ipv4',
   'ipv6',
   'port',
   'userAgent',
