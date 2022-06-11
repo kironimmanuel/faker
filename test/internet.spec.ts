@@ -354,9 +354,9 @@ describe('internet', () => {
         });
       });
 
-      describe('ip()', () => {
+      describe('ipv4()', () => {
         it('should return a random IPv4 address with four parts', () => {
-          const ip = faker.internet.ip();
+          const ip = faker.internet.ipv4();
 
           expect(ip).toBeTruthy();
           expect(ip).toBeTypeOf('string');
