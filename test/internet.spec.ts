@@ -354,6 +354,16 @@ describe('internet', () => {
         });
       });
 
+      describe('ip()', () => {
+        it('should return a random IPv4 or IPv6 address', () => {
+          const ip = faker.internet.ip();
+
+          expect(ip).toBeTruthy();
+          expect(ip).toBeTypeOf('string');
+          expect(ip).toSatisfy((value: string) => validator.isIP(value));
+        });
+      });
+
       describe('ipv4()', () => {
         it('should return a random IPv4 address with four parts', () => {
           const ip = faker.internet.ipv4();
