@@ -74,7 +74,7 @@ describe('internet', () => {
           expect(email).toSatisfy(validator.isEmail);
 
           const [, suffix] = email.split('@');
-          expect(faker.definitions.internet.free_email).toContain(suffix);
+          expect(faker.definitions.internet?.free_email).toContain(suffix);
         });
 
         it('should return an email with given firstName', () => {
@@ -119,7 +119,7 @@ describe('internet', () => {
           const [prefix, suffix] = email.split('@');
 
           expect(prefix).toMatch(/^思源_唐3/);
-          expect(faker.definitions.internet.free_email).toContain(suffix);
+          expect(faker.definitions.internet?.free_email).toContain(suffix);
         });
 
         it('should return an email with special characters', () => {
@@ -151,7 +151,7 @@ describe('internet', () => {
           const suffix = email.split('@')[1];
 
           expect(suffix).toMatch(/^example\.(com|net|org)$/);
-          expect(faker.definitions.internet.example_email).toContain(suffix);
+          expect(faker.definitions.internet?.example_email).toContain(suffix);
         });
 
         it('should return an email with the example suffix and given firstName', () => {
@@ -164,7 +164,7 @@ describe('internet', () => {
           const [prefix, suffix] = email.split('@');
 
           expect(suffix).toMatch(/^example\.(com|net|org)$/);
-          expect(faker.definitions.internet.example_email).toContain(suffix);
+          expect(faker.definitions.internet?.example_email).toContain(suffix);
           expect(prefix).toMatch(/^Aiden.Harann55/);
         });
 
@@ -178,7 +178,7 @@ describe('internet', () => {
           const [prefix, suffix] = email.split('@');
 
           expect(suffix).toMatch(/^example\.(com|net|org)$/);
-          expect(faker.definitions.internet.example_email).toContain(suffix);
+          expect(faker.definitions.internet?.example_email).toContain(suffix);
           expect(prefix).toMatch(/^Aiden([._]Harann)?\d*/);
         });
 
@@ -192,7 +192,7 @@ describe('internet', () => {
           const [prefix, suffix] = email.split('@');
 
           expect(suffix).toMatch(/^example\.(com|net|org)$/);
-          expect(faker.definitions.internet.example_email).toContain(suffix);
+          expect(faker.definitions.internet?.example_email).toContain(suffix);
           expect(prefix).toMatch(/^思源_唐3/);
         });
 
@@ -208,7 +208,7 @@ describe('internet', () => {
           const [prefix, suffix] = email.split('@');
 
           expect(suffix).toMatch(/^example\.(com|net|org)$/);
-          expect(faker.definitions.internet.example_email).toContain(suffix);
+          expect(faker.definitions.internet?.example_email).toContain(suffix);
           expect(prefix).toMatch(/^Mike([.!#$%&'*+-/=?^_`{|}~]Smith)?\d*/);
         });
       });
@@ -325,7 +325,7 @@ describe('internet', () => {
           const [prefix, suffix] = domainName.split('.');
 
           expect(prefix).toSatisfy(validator.isSlug);
-          expect(faker.definitions.internet.domain_suffix).toContain(suffix);
+          expect(faker.definitions.internet?.domain_suffix).toContain(suffix);
         });
       });
 
@@ -335,7 +335,7 @@ describe('internet', () => {
 
           expect(domainSuffix).toBeTruthy();
           expect(domainSuffix).toBeTypeOf('string');
-          expect(faker.definitions.internet.domain_suffix).toContain(
+          expect(faker.definitions.internet?.domain_suffix).toContain(
             domainSuffix
           );
         });
