@@ -58,10 +58,6 @@ describe('datatype', () => {
 
     t.itRepeated('boolean', 5);
 
-    t.describe('hexadecimal', (t) => {
-      t.it('noArgs').it('with length', 42);
-    });
-
     t.it('json');
 
     t.describe('array', (t) => {
@@ -319,20 +315,6 @@ describe('datatype', () => {
           const RFC4122 =
             /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
           expect(UUID).toMatch(RFC4122);
-        });
-      });
-
-      describe('hexadecimal', () => {
-        it('generates single hex character when no additional argument was provided', () => {
-          const hex = faker.datatype.hexadecimal();
-          expect(hex).toMatch(/^(0x)[0-9a-f]{1}$/i);
-          expect(hex.substring(2)).toHaveLength(1);
-        });
-
-        it('generates a random hex string', () => {
-          const hex = faker.datatype.hexadecimal(5);
-          expect(hex).toMatch(/^(0x)[0-9a-f]+$/i);
-          expect(hex.substring(2)).toHaveLength(5);
         });
       });
 
