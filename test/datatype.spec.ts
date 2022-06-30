@@ -63,10 +63,6 @@ describe('datatype', () => {
     t.describe('array', (t) => {
       t.it('noArgs').it('with length', 4);
     });
-
-    t.describe('bigInt', (t) => {
-      t.it('noArgs').it('with value', 42);
-    });
   });
 
   describe(`random seeded tests for seed ${JSON.stringify(
@@ -336,83 +332,6 @@ describe('datatype', () => {
         it('generates an array with 1 element', () => {
           const generatedArray = faker.datatype.array(1);
           expect(generatedArray).toHaveLength(1);
-        });
-      });
-
-      describe('bigInt', () => {
-        it('should generate a bigInt value', () => {
-          const generateBigInt = faker.datatype.bigInt();
-          expect(generateBigInt).toBeTypeOf('bigint');
-        });
-
-        it('should generate a big bigInt value with low delta', () => {
-          const min = 999999999n;
-          const max = 1000000000n;
-          const generateBigInt = faker.datatype.bigInt({ min, max });
-          expect(generateBigInt).toBeTypeOf('bigint');
-          expect(generateBigInt).toBeGreaterThanOrEqual(min);
-          expect(generateBigInt).toBeLessThanOrEqual(max);
-        });
-
-        it('should return a random bigint given a maximum value as BigInt', () => {
-          const max = 10n;
-          expect(faker.datatype.bigInt(max)).toBeGreaterThanOrEqual(0n);
-          expect(faker.datatype.bigInt(max)).toBeLessThanOrEqual(max);
-        });
-
-        it('should return a random bigint given a maximum value as Object', () => {
-          const options = { max: 10n };
-          expect(faker.datatype.bigInt(options)).toBeGreaterThanOrEqual(0n);
-          expect(faker.datatype.bigInt(options)).toBeLessThanOrEqual(
-            options.max
-          );
-        });
-
-        it('should return a random bigint given a maximum value of 0', () => {
-          const options = { max: 0n };
-          expect(faker.datatype.bigInt(options)).toBe(0n);
-        });
-
-        it('should return a random bigint given a negative bigint minimum and maximum value of 0', () => {
-          const options = { min: -100n, max: 0n };
-          expect(faker.datatype.bigInt(options)).toBeGreaterThanOrEqual(
-            options.min
-          );
-          expect(faker.datatype.bigInt(options)).toBeLessThanOrEqual(
-            options.max
-          );
-        });
-
-        it('should return a random bigint between a range', () => {
-          const options = { min: 22, max: 33 };
-          for (let i = 0; i < 100; i++) {
-            const randomBigInt = faker.datatype.bigInt(options);
-            expect(randomBigInt).toBeGreaterThanOrEqual(options.min);
-            expect(randomBigInt).toBeLessThanOrEqual(options.max);
-          }
-        });
-
-        it('should succeed with success-rate', () => {
-          const min = 0n;
-          const max = 1000000000000n;
-          const randomBigInt = faker.datatype.bigInt({ min, max });
-          expect(randomBigInt).toBeGreaterThanOrEqual(min);
-          expect(randomBigInt).toBeLessThanOrEqual(max);
-        });
-
-        it('should not mutate the input object', () => {
-          const initialMin = 1n;
-          const initialOtherProperty = 'hello darkness my old friend';
-          const input: {
-            min?: bigint;
-            max?: bigint;
-            otherProperty: string;
-          } = Object.freeze({
-            min: initialMin,
-            otherProperty: initialOtherProperty,
-          });
-
-          expect(() => faker.datatype.bigInt(input)).not.toThrow();
         });
       });
     }
