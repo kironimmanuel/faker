@@ -360,7 +360,7 @@ describe('internet', () => {
 
           expect(ip).toBeTruthy();
           expect(ip).toBeTypeOf('string');
-          expect(ip).toSatisfy((value: string) => validator.isIP(value));
+          expect(ip).toSatisfy(validator.isIP);
         });
       });
 
