@@ -1,5 +1,6 @@
 import type { Faker } from '../..';
 import { FakerError } from '../../errors/faker-error';
+import { deprecated } from '../../internal/deprecated';
 
 /**
  * Module to generate various primitive values and data types.
@@ -161,17 +162,21 @@ export class Datatype {
   /**
    * Returns a UUID v4 ([Universally Unique Identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier)).
    *
+   * @see faker.string.uuid()
+   *
    * @example
    * faker.datatype.uuid() // '4136cd0b-d90b-4af7-b485-5d1ded8db252'
+   *
+   * @deprecated Use faker.string.uuid() instead.
    */
   uuid(): string {
-    const RFC4122_TEMPLATE = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
-    const replacePlaceholders = (placeholder) => {
-      const random = this.number({ min: 0, max: 15 });
-      const value = placeholder === 'x' ? random : (random & 0x3) | 0x8;
-      return value.toString(16);
-    };
-    return RFC4122_TEMPLATE.replace(/[xy]/g, replacePlaceholders);
+    deprecated({
+      deprecated: 'faker.datatype.uuid()',
+      proposed: 'faker.string.uuid()',
+      since: '8.0',
+      until: '9.0',
+    });
+    return this.faker.string.uuid();
   }
 
   /**
