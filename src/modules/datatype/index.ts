@@ -194,41 +194,22 @@ export class Datatype {
    *
    * @param length Length of the generated number. Defaults to `1`.
    *
+   * @see faker.string.hexadecimal()
+   *
    * @example
    * faker.datatype.hexadecimal() // '0xb'
    * faker.datatype.hexadecimal(10) // '0xaE13F044fb'
+   *
+   * @deprecated
    */
   hexadecimal(length = 1): string {
-    let wholeString = '';
-
-    for (let i = 0; i < length; i++) {
-      wholeString += this.faker.helpers.arrayElement([
-        '0',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        'a',
-        'b',
-        'c',
-        'd',
-        'e',
-        'f',
-        'A',
-        'B',
-        'C',
-        'D',
-        'E',
-        'F',
-      ]);
-    }
-
-    return `0x${wholeString}`;
+    deprecated({
+      deprecated: 'faker.datatype.hexadecimal()',
+      proposed: 'faker.string.hexadecimal()',
+      since: '8.0',
+      until: '9.0',
+    });
+    return this.faker.string.hexadecimal(length);
   }
 
   /**
