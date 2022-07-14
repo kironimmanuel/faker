@@ -79,7 +79,7 @@ export class Vehicle {
     return `${this.faker.random.alphaNumeric(10, {
       casing: 'upper',
       bannedChars,
-    })}${this.faker.random.alpha({
+    })}${this.faker.string.alpha({
       count: 1,
       casing: 'upper',
       bannedChars,
@@ -107,7 +107,7 @@ export class Vehicle {
    * faker.vehicle.vrm() // 'MF56UPA'
    */
   vrm(): string {
-    return `${this.faker.random.alpha({
+    return `${this.faker.string.alpha({
       count: 2,
       casing: 'upper',
     })}${this.faker.datatype.number({
@@ -116,7 +116,7 @@ export class Vehicle {
     })}${this.faker.datatype.number({
       min: 0,
       max: 9,
-    })}${this.faker.random.alpha({ count: 3, casing: 'upper' })}`.toUpperCase();
+    })}${this.faker.string.alpha({ count: 3, casing: 'upper' })}`.toUpperCase();
   }
 
   /**
