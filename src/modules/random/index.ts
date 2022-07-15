@@ -262,10 +262,14 @@ export class Random {
    * @param options.casing The casing of the characters. Defaults to `'lower'`.
    * @param options.bannedChars An array of characters and digits which should be banned in the generated string. Defaults to `[]`.
    *
+   * @see faker.string.alphaNumeric()
+   *
    * @example
    * faker.random.alphaNumeric() // '2'
    * faker.random.alphaNumeric(5) // '3e5v7'
    * faker.random.alphaNumeric(5, { bannedChars: ["a"] }) // 'xszlm'
+   *
+   * @deprecated Use faker.string.alphaNumeric() instead.
    */
   alphaNumeric(
     count: number = 1,
@@ -274,46 +278,17 @@ export class Random {
       bannedChars?: readonly LiteralUnion<AlphaNumericChar>[] | string;
     } = {}
   ): string {
-    if (count <= 0) {
-      return '';
-    }
-
-    const {
-      // Switch to 'mixed' with v8.0
-      casing = 'lower',
-    } = options;
-    let { bannedChars = [] } = options;
-
-    if (typeof bannedChars === 'string') {
-      bannedChars = bannedChars.split('');
-    }
-
-    let charsArray = [...DIGIT_CHARS];
-
-    switch (casing) {
-      case 'upper':
-        charsArray.push(...UPPER_CHARS);
-        break;
-      case 'lower':
-        charsArray.push(...LOWER_CHARS);
-        break;
-      case 'mixed':
-      default:
-        charsArray.push(...LOWER_CHARS, ...UPPER_CHARS);
-        break;
-    }
-
-    charsArray = arrayRemove(charsArray, bannedChars);
-
-    if (charsArray.length === 0) {
-      throw new FakerError(
-        'Unable to generate string, because all possible characters are banned.'
-      );
-    }
-
-    return Array.from({ length: count }, () =>
-      this.faker.helpers.arrayElement(charsArray)
-    ).join('');
+    deprecated({
+      deprecated: 'faker.random.alphaNumeric()',
+      proposed: 'faker.string.alphaNumeric()',
+      since: '8.0',
+      until: '9.0',
+    });
+    return this.faker.string.alphaNumeric({
+      bannedChars: options.bannedChars,
+      casing: options.casing,
+      count,
+    });
   }
 
   /**
