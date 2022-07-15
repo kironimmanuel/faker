@@ -1,5 +1,4 @@
 import type { Faker } from '../..';
-import { FakerError } from '../../errors/faker-error';
 import { deprecated } from '../../internal/deprecated';
 import type { LiteralUnion } from '../../utils/types';
 
@@ -299,12 +298,16 @@ export class Random {
    * @param options.allowLeadingZeros If true, leading zeros will be allowed. Defaults to `false`.
    * @param options.bannedDigits An array of digits which should be banned in the generated string. Defaults to `[]`.
    *
+   * @see faker.string.numeric()
+   *
    * @example
    * faker.random.numeric() // '2'
    * faker.random.numeric(5) // '31507'
    * faker.random.numeric(42) // '56434563150765416546479875435481513188548'
    * faker.random.numeric(42, { allowLeadingZeros: true }) // '00564846278453876543517840713421451546115'
    * faker.random.numeric(6, { bannedDigits: ['0'] }) // '943228'
+   *
+   * @deprecated Use faker.string.numeric() instead.
    */
   numeric(
     length: number = 1,
@@ -313,44 +316,16 @@ export class Random {
       bannedDigits?: readonly LiteralUnion<NumericChar>[] | string;
     } = {}
   ): string {
-    if (length <= 0) {
-      return '';
-    }
-
-    const { allowLeadingZeros = false } = options;
-    let { bannedDigits = [] } = options;
-
-    if (typeof bannedDigits === 'string') {
-      bannedDigits = bannedDigits.split('');
-    }
-
-    const allowedDigits = DIGIT_CHARS.filter(
-      (digit) => !bannedDigits.includes(digit)
-    );
-
-    if (
-      allowedDigits.length === 0 ||
-      (allowedDigits.length === 1 &&
-        !allowLeadingZeros &&
-        allowedDigits[0] === '0')
-    ) {
-      throw new FakerError(
-        'Unable to generate numeric string, because all possible digits are banned.'
-      );
-    }
-
-    let result = '';
-
-    if (!allowLeadingZeros && !bannedDigits.includes('0')) {
-      result += this.faker.helpers.arrayElement(
-        allowedDigits.filter((digit) => digit !== '0')
-      );
-    }
-
-    while (result.length < length) {
-      result += this.faker.helpers.arrayElement(allowedDigits);
-    }
-
-    return result;
+    deprecated({
+      deprecated: 'faker.random.numeric()',
+      proposed: 'faker.string.numeric()',
+      since: '8.0',
+      until: '8.0',
+    });
+    return this.faker.string.numeric({
+      allowLeadingZeros: options.allowLeadingZeros,
+      bannedDigits: options.bannedDigits,
+      length,
+    });
   }
 }

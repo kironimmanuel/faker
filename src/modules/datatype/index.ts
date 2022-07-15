@@ -290,7 +290,8 @@ export class Datatype {
 
     const offset =
       BigInt(
-        this.faker.random.numeric(delta.toString(10).length, {
+        this.faker.string.numeric({
+          length: delta.toString(10).length,
           allowLeadingZeros: true,
         })
       ) %
