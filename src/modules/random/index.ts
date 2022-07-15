@@ -4,10 +4,6 @@ import type { LiteralUnion } from '../../utils/types';
 
 export type Casing = 'upper' | 'lower' | 'mixed';
 
-const UPPER_CHARS: readonly string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const LOWER_CHARS: readonly string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
-const DIGIT_CHARS: readonly string[] = '0123456789'.split('');
-
 export type LowerAlphaChar =
   | 'a'
   | 'b'
@@ -78,20 +74,6 @@ export type NumericChar =
 
 export type AlphaChar = LowerAlphaChar | UpperAlphaChar;
 export type AlphaNumericChar = AlphaChar | NumericChar;
-
-/**
- * Method to reduce array of characters.
- *
- * @param arr existing array of characters
- * @param values array of characters which should be removed
- * @returns new array without banned characters
- */
-function arrayRemove<T>(arr: T[], values: readonly T[]): T[] {
-  values.forEach((value) => {
-    arr = arr.filter((ele) => ele !== value);
-  });
-  return arr;
-}
 
 /**
  * Generates random values of different kinds.
