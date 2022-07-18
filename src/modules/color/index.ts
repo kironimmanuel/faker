@@ -297,7 +297,11 @@ export class Color {
     let color: string | number[];
     let cssFunction: CSSFunction = 'rgb';
     if (format === 'hex') {
-      color = this.faker.number.hexadecimal(includeAlpha ? 8 : 6);
+      // workaround until we have faker.string.hex()
+      const length = includeAlpha ? 8 : 6;
+      color = this.faker.number
+        .hex({ max: Math.pow(16, length) })
+        .padStart(length, '0');
       color = formatHexColor(color, options);
       return color;
     }

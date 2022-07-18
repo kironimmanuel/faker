@@ -321,7 +321,11 @@ export class Finance {
    * faker.finance.ethereumAddress() // '0xf03dfeecbafc5147241cc4c4ca20b3c9dfd04c4a'
    */
   ethereumAddress(): string {
-    const address = this.faker.number.hexadecimal(40).toLowerCase();
+    // workaround until we have faker.string.hex()
+    const address = Array.from({ length: 40 })
+      .map(() => this.faker.number.hex({ max: 15 }))
+      .join('')
+      .toLowerCase();
     return `0x${address}`;
   }
 
