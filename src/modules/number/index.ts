@@ -1,18 +1,6 @@
 import type { Faker } from '../..';
 import { FakerError } from '../../errors/faker-error';
 
-export type Range = {
-  /**
-   * Lower bound for generated number. Defaults to `0`.
-   */
-  min?: number;
-
-  /**
-   * Upper bound for generated number. Defaults to `min + 99999`.
-   */
-  max?: number;
-};
-
 /**
  * Module to generate numbers of any kind.
  */
@@ -43,7 +31,7 @@ export class NumberModule {
    * faker.number.int({ min: 1000000 }) // 1031433
    * faker.number.int({ max: 100 }) // 42
    */
-  int(options: number | Range = {}): number {
+  int(options: number | { min?: number; max?: number } = {}): number {
     if (typeof options === 'number') {
       options = { max: options };
     }
@@ -121,7 +109,7 @@ export class NumberModule {
    * faker.datatype.hex(16) // '9'
    * faker.datatype.hex({ min: 0, max: 65536 }) // 'af17'
    */
-  hex(options: number | Range = {}): string {
+  hex(options: number | { min?: number; max?: number } = {}): string {
     if (typeof options === 'number') {
       options = { max: options };
     }
