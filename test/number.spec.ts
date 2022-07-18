@@ -4,12 +4,7 @@ import { faker, FakerError } from '../src';
 import type { NumberModule } from '../src/modules/number';
 import { seededRuns } from './support/seededRuns';
 
-const functionNames: (keyof NumberModule)[] = [
-  'bigInt',
-  'float',
-  'hexadecimal',
-  'int',
-];
+const functionNames: (keyof NumberModule)[] = ['bigInt', 'float', 'hex', 'int'];
 
 describe('number', () => {
   afterEach(() => {
@@ -189,13 +184,13 @@ describe('number', () => {
 
     describe('hexadecimal', () => {
       it('generates single hex character when no additional argument was provided', () => {
-        const hex = faker.number.hexadecimal();
+        const hex = faker.number.hex();
         expect(hex).toHaveLength(1);
         expect(hex).toSatisfy(validator.isHexadecimal);
       });
 
       it('generates a random hex string', () => {
-        const hex = faker.number.hexadecimal(5);
+        const hex = faker.number.hex(5);
         expect(hex).toHaveLength(5);
         expect(hex).toSatisfy(validator.isHexadecimal);
       });

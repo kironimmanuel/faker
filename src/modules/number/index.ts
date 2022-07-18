@@ -118,7 +118,7 @@ export class NumberModule {
    * faker.datatype.hexadecimal() // 'b'
    * faker.datatype.hexadecimal(10) // 'ae13f044fb'
    */
-  hexadecimal(length = 1): string {
+  hex(length = 1): string {
     let hexString = '';
 
     for (let i = 0; i < length; i++) {
